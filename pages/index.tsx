@@ -12,6 +12,7 @@ import {
   useClipboard,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [response, setResponse] = useState<any>();
@@ -74,7 +75,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Center mt={24} flexDirection={"column"}>
-        <VStack>
+        <Box>
+          <Link
+            href={"https://app.splitbee.io/public/foaas.vercel.app"}
+            target="_blank"
+          >
+            analytics
+          </Link>
+        </Box>
+        <VStack mt={24}>
           <InputGroup>
             <InputLeftAddon>From</InputLeftAddon>
             <Input onChange={(e) => setFrom(e.target.value)} />
