@@ -12,9 +12,11 @@ import {
   useClipboard,
   Text,
   Flex,
+  HStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function Home() {
   const [response, setResponse] = useState<any>();
@@ -77,22 +79,35 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Center mt={24} flexDirection={"column"}>
-        <Box>
-          <Box>
-            <Flex>
-              built by reed using{" "}
-              <Link href={"https://foaas.com/"} target="_blank">
+        <VStack>
+          <HStack>
+            <Text>FE built by reed, uses</Text>
+            <Link href={"https://foaas.com/"} target="_blank">
+              <HStack>
                 <Text textDecoration={"underline"}>foaas api</Text>
-              </Link>
-            </Flex>
-          </Box>
+                <ExternalLinkIcon />
+              </HStack>
+            </Link>
+          </HStack>
+
+          <Link href="https://github.com/reedislost/foaas" target={"_blank"}>
+            <HStack>
+              <Text>send a PR, idc what u do</Text>
+              <ExternalLinkIcon />
+            </HStack>
+          </Link>
+
           <Link
             href={"https://app.splitbee.io/public/foaas.vercel.app"}
             target="_blank"
           >
-            analytics
+            <HStack>
+              {" "}
+              <Text>analytics</Text>
+              <ExternalLinkIcon />
+            </HStack>
           </Link>
-        </Box>
+        </VStack>
         <VStack mt={24}>
           <InputGroup>
             <InputLeftAddon>From</InputLeftAddon>
