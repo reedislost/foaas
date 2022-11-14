@@ -66,10 +66,6 @@ export default function Home() {
     setResponse(await response.json());
   };
 
-  useEffect(() => {
-    setValue(response.message);
-  }, [response]);
-
   return (
     <div className={styles.container}>
       <Head>
