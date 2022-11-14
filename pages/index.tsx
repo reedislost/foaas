@@ -10,6 +10,7 @@ import {
   VStack,
   InputLeftAddon,
   useClipboard,
+  Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -76,6 +77,7 @@ export default function Home() {
       </Head>
       <Center mt={24} flexDirection={"column"}>
         <Box>
+          <Text>built by reed</Text>
           <Link
             href={"https://app.splitbee.io/public/foaas.vercel.app"}
             target="_blank"
