@@ -16,14 +16,13 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { CopyIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function Home() {
   const [response, setResponse] = useState<any>();
   const [from, setFrom] = useState<any>("");
   const [to, setTo] = useState<any>("");
-  const { onCopy, hasCopied } = useClipboard("");
-  const [value, setValue] = useState<any>("");
+  const { onCopy, value, setValue, hasCopied } = useClipboard("");
 
   const baseUrl = "https://foaas.com";
 
@@ -71,6 +70,12 @@ export default function Home() {
     setResponse(await response.json());
   };
 
+  useEffect(() => {
+    if (response) {
+      setValue(response.message + response.subtitle);
+    }
+  }, [response]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -79,7 +84,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Center mt={24} flexDirection={"column"}>
-        <VStack>
+        <VStack bg="gray.200" p={5} boxShadow="lg" borderRadius={"lg"}>
           <HStack>
             <Text>FE built by reed, uses</Text>
             <Link href={"https://foaas.com/"} target="_blank">
@@ -108,7 +113,7 @@ export default function Home() {
             </HStack>
           </Link>
         </VStack>
-        <VStack mt={24}>
+        <VStack mt={12} p={5}>
           <InputGroup>
             <InputLeftAddon>From</InputLeftAddon>
             <Input onChange={(e) => setFrom(e.target.value)} />
@@ -120,10 +125,27 @@ export default function Home() {
 
           <Button onClick={frig}>frig off</Button>
         </VStack>
-
-        <Box mt={24} fontSize={"2xl"} maxW={"500px"}>
-          {response?.message} {response?.subtitle}
-        </Box>
+        {response && (
+          <Box
+            mt={12}
+            mb={12}
+            fontSize={"2xl"}
+            maxW={"500px"}
+            bg="gray.200"
+            p={5}
+            borderRadius={"lg"}
+            boxShadow={"lg"}
+          >
+            <Center>
+              <Button onClick={onCopy}>
+                {hasCopied ? <Text>copied</Text> : <CopyIcon />}
+              </Button>
+            </Center>
+            <Text>
+              {response?.message} {response?.subtitle}
+            </Text>
+          </Box>
+        )}
       </Center>
     </div>
   );
